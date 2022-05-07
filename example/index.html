@@ -5,12 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background-color: rgb(255, 242, 225)
+        }
+        .icon {
+            margin-top: 10px;
+            width: 10vw;
+            height: 10vw;
+            transition: all .1s;
+            position: absolute;
+        }
+        .icon-1 {
+            background: aquamarine url("./assets/1.jpeg") no-repeat center / cover;
+            left: 30vw;
+            top: 10vh;
+        }
+        .icon-2 {
+            background: aquamarine url("./assets/2.jpg") no-repeat center / cover;
+            left: 60vw;
+            top: 30vh;
+        }
+        .icon-3 {
+            background: aquamarine url("./assets/3.jpeg") no-repeat center / cover;
+            left: 35vw;
+            top: 60vh;
+        }
+    </style>
 </head>
 <body>
+    <div class="icon icon-1"></div>
+    <div class="icon icon-2"></div>
+    <div class="icon icon-3"></div>
+
     <script src="../dist/bounce.js"></script>
     <script>
-        var bounce = new Bounce();
-        bounce.test();
+        var bounce = new Bounce({
+            el: '.icon',
+        });
     </script>
 </body>
 </html>
