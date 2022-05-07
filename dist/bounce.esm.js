@@ -7,7 +7,14 @@ var defaultOptions = {
   el: '',
   container: 'body',
   effect: 1,
-  direction: 1
+  direction: 1,
+  effectConfig: {
+    maxAngle: 30,
+    moveSpeed: 40
+  },
+  perspective: 800,
+  transitionDuration: 0.1,
+  keep: true
 };
 
 class common {
@@ -34,16 +41,26 @@ class common {
 
 class Bounce {
   constructor (options = {}) {
-    this.initOptions(options);
+    this.init(options);
     if (!this.checkOptions()) {
       return
     }
+    this.calCenterPosition();
     this.listenMouseMove();
     this.listenMouseLeave();
   }
 
-  initOptions (options) {
+  init (options) {
     this.options = common.extend(JSON.parse(JSON.stringify(defaultOptions)), options);
+    this.elObjs = document.querySelectorAll(this.options.el);
+    this.containerObj = document.querySelector(this.options.container);
+    this.containerObj.style.transformStyle = 'preserve-3d';
+    this.containerObj.style.perspective = `${this.options.perspective}px`;
+    this.elObjs.forEach(item => {
+      item.style.transitionProperty = 'transform';
+      item.style.transitionDuration = `${this.options.transitionDuration}s`;
+      item.style.transformStyle = 'preserve-3d';
+    });
   }
 
   checkOptions () {
@@ -59,22 +76,76 @@ class Bounce {
     return true
   }
 
+  calCenterPosition () {
+    this.centerPosition = this.getCenterPostion(this.containerObj);
+  }
+
   listenMouseMove () {
-    this.elObjs = document.querySelectorAll(this.options.el);
-    this.containerObj = document.querySelector(this.options.container);
-    this.containerObj.addEventListener('mousemove', this.handleMouseMove, false);
+    this.containerObj.addEventListener('mousemove', this.handleMouseMove.bind(this), false);
   }
 
   listenMouseLeave () {
-    this.containerObj.addEventListener('mouseleave', this.handleMouseLeave, false);
+    this.containerObj.addEventListener('mouseleave', this.handleMouseLeave.bind(this), false);
   }
 
-  handleMouseMove (e) {
-    console.log(e);
+  handleMouseMove (event) {
+    window.requestAnimationFrame(() => {
+      let position = this.getPosition(event);
+      let deltaPosition = this.calcDeltaPostion(position, this.centerPosition);
+      let offsetPercent = this.calOffsetPercent(position, this.centerPosition);
+      this.elObjs.forEach(item => {
+        this.effect(item, offsetPercent, deltaPosition);
+      });
+    });
   }
 
   handleMouseLeave () {
+    this.options.keep || setTimeout(() => {
+      this.elObjs.forEach(item => {
+        if (this.options.effect === 1) {
+          item.style.transform = `rotateX(0) rotateY(0)`;
+        } else if (this.options.effect === 2) {
+          item.style.transform = `translateX(0) translateY(0)`;
+        }
+      });
+    }, this.options.transitionDuration * 1000);
+  }
 
+  getPosition (event) {
+    let e = event || window.event;
+    return {
+      x: e.clientX,
+      y: e.clientY
+    }
+  }
+
+  getCenterPostion (obj) {
+    return {
+      x: obj.offsetWidth / 2,
+      y: obj.offsetHeight / 2
+    }
+  }
+
+  calcDeltaPostion (postion, centerPosition) {
+    return {
+      x: postion.x - centerPosition.x,
+      y: postion.y - centerPosition.y
+    }
+  }
+
+  calOffsetPercent (postion, centerPosition) {
+    return {
+      xPercent: (postion.x - centerPosition.x) / centerPosition.x,
+      yPercent: (postion.y - centerPosition.y) / centerPosition.y
+    }
+  }
+
+  effect (obj, offsetPercent, deltaPosition) {
+    if (this.options.effect === 1) {
+      obj.style.transform = `rotateX(${(offsetPercent.yPercent * this.options.effectConfig.maxAngle).toFixed(0) * -1 * this.options.direction}deg) rotateY(${(offsetPercent.xPercent * this.options.effectConfig.maxAngle).toFixed(0) * this.options.direction}deg)`;
+    } else if (this.options.effect === 2) {
+      obj.style.transform = `translateX(${offsetPercent.xPercent * this.options.effectConfig.moveSpeed * this.options.direction}px) translateY(${offsetPercent.yPercent * this.options.effectConfig.moveSpeed * this.options.direction}px)`;
+    }
   }
 }
 
