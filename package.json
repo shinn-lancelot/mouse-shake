@@ -1,0 +1,48 @@
+{
+  "name": "bounce",
+  "version": "0.0.0",
+  "description": "一个基于鼠标移动的动画库",
+  "main": "dist/bounce.cjs.js",
+  "module": "dist/bounce.esm.js",
+  "browser": "dist/bounce.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm run watch",
+    "watch": "rollup -c build/rollup.config.js -w",
+    "build": "rollup -c build/rollup.config.js",
+    "lint:init": "eslint --init",
+    "lint": "eslint --fix --ext .js src"
+  },
+  "keywords": [
+    "bounce"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shinn-lancelot/bounce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shinn-lancelot/bounce/issues"
+  },
+  "readme": "README.md",
+  "author": "shinn_lancelot",
+  "license": "MIT",
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "eslint": "^5.15.3",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "node-sass": "^4.11.0",
+    "rollup": "^1.7.3",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.2.2",
+    "rollup-plugin-flow-no-whitespace": "^1.0.0",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-terser": "^4.0.4"
+  }
+}
