@@ -112,6 +112,8 @@
             item.style.transform = `rotateX(0) rotateY(0)`;
           } else if (this.options.effect === 2) {
             item.style.transform = `translateX(0) translateY(0)`;
+          } else if (this.options.effect === 3) {
+            item.style.transform = `rotateX(0) rotateY(0) translateX(0) translateY(0)`;
           }
         });
       }, this.options.transitionDuration * 1000);
@@ -147,10 +149,16 @@
     }
 
     effect (obj, offsetPercent, deltaPosition) {
+      let rotateXDeg = (offsetPercent.yPercent * this.options.effectConfig.maxAngle).toFixed(0) * -1 * this.options.direction;
+      let rotateYDeg = (offsetPercent.xPercent * this.options.effectConfig.maxAngle).toFixed(0) * this.options.direction;
+      let translateXPx = offsetPercent.xPercent * this.options.effectConfig.moveSpeed * this.options.direction;
+      let translateYPx = offsetPercent.yPercent * this.options.effectConfig.moveSpeed * this.options.direction;
       if (this.options.effect === 1) {
-        obj.style.transform = `rotateX(${(offsetPercent.yPercent * this.options.effectConfig.maxAngle).toFixed(0) * -1 * this.options.direction}deg) rotateY(${(offsetPercent.xPercent * this.options.effectConfig.maxAngle).toFixed(0) * this.options.direction}deg)`;
+        obj.style.transform = `rotateX(${rotateXDeg}deg) rotateY(${rotateYDeg}deg)`;
       } else if (this.options.effect === 2) {
-        obj.style.transform = `translateX(${offsetPercent.xPercent * this.options.effectConfig.moveSpeed * this.options.direction}px) translateY(${offsetPercent.yPercent * this.options.effectConfig.moveSpeed * this.options.direction}px)`;
+        obj.style.transform = `translateX(${translateXPx}px) translateY(${translateYPx}px)`;
+      } else if (this.options.effect === 3) {
+        obj.style.transform = `rotateX(${rotateXDeg}deg) rotateY(${rotateYDeg}deg) translateX(${translateXPx}px) translateY(${translateYPx}px)`;
       }
     }
   }
