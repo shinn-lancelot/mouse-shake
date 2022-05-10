@@ -4,8 +4,6 @@ import buble from 'rollup-plugin-buble'
 import { terser } from 'rollup-plugin-terser'
 import flow from 'rollup-plugin-flow-no-whitespace'
 import json from 'rollup-plugin-json'
-import postcss from 'rollup-plugin-postcss'
-import cssnano from 'cssnano'
 import serve from 'rollup-plugin-serve'
 import pkg from '../package.json'
 
@@ -32,10 +30,25 @@ const outFileInfo = {
     'umd': outPath + libName.toLowerCase() + '.min.js'
   }
 }
-const outPutCss = {
-  'dev': outPath + libName.toLowerCase() + '.css',
-  'prod': outPath + libName.toLowerCase() + '.min.css'
-}
+let plugins = [
+  resolve(),
+  commonjs(),
+  buble({
+    include: 'src/js/**'
+  }),
+  flow(),
+  json()
+]
+production && plugins.concat([
+  terser(),
+  serve({
+    open: true,
+    openPage: '/example/index.html',
+    contentBase: '',
+    host: 'localhost',
+    port: 1180
+  })
+])
 
 export default {
   input: 'src/index.js',
@@ -59,27 +72,5 @@ export default {
       name: libName
     }
   ],
-  plugins: [
-    resolve(),
-    commonjs(),
-    buble({
-      include: 'src/js/**'
-    }),
-    production && terser(),
-    flow(),
-    json(),
-    postcss({
-      // minimize: production && true,  // 已用cssnano替代压缩工作
-      plugins: [production && cssnano],
-      extract: production ? outPutCss.prod : outPutCss.dev
-    }),
-    production ||
-      serve({
-        open: true,
-        openPage: '/example/index.html',
-        contentBase: '',
-        host: 'localhost',
-        port: 1180
-      })
-  ]
+  plugins: plugins
 }
