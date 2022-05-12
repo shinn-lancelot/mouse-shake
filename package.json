@@ -27,6 +27,12 @@
   "readme": "README.md",
   "author": "shinn_lancelot",
   "license": "MIT",
+  "files": [
+    "dist",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
