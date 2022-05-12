@@ -14,41 +14,53 @@
         body {
             width: 100vw;
             height: 100vh;
+            background-color: rgb(255, 242, 225);
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
             position: relative;
-            background-color: rgb(255, 242, 225)
+            width: calc(100vw - 300px);
+            height: calc(100vh - 180px);
+            background-color: bisque;
         }
         .icon {
             margin-top: 10px;
-            width: 15vw;
-            height: 15vw;
+            width: 10vw;
+            height: 10vw;
             position: absolute;
         }
         .icon-1 {
             background: aquamarine url("./assets/1.jpeg") no-repeat center / cover;
-            left: 30vw;
-            top: 10vh;
+            left: 30%;
+            top: 8%;
         }
         .icon-2 {
             background: aquamarine url("./assets/2.jpg") no-repeat center / cover;
-            left: 60vw;
-            top: 30vh;
+            left: 50%;
+            top: 35%;
         }
         .icon-3 {
             background: aquamarine url("./assets/3.jpeg") no-repeat center / cover;
-            left: 35vw;
-            top: 60vh;
+            left: 35%;
+            top: 65%;
         }
     </style>
 </head>
 <body>
-    <div class="icon icon-1"></div>
-    <div class="icon icon-2"></div>
-    <div class="icon icon-3"></div>
+    <div class="container">
+        <div class="icon icon-1"></div>
+        <div class="icon icon-2"></div>
+        <div class="icon icon-3"></div>
+    </div>
 
     <script src="../dist/mouse-shake.js"></script>
     <script>
         var MS = new MouseShake({
             el: '.icon',
+            container: '.container',
             effect: 3,
         });
     </script>

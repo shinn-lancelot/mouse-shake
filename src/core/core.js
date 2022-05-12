@@ -18,13 +18,10 @@ export default class MouseShake {
   init (options) {
     this.options = common.extend(JSON.parse(JSON.stringify(defaultOptions)), options)
     this.elObjs = document.querySelectorAll(this.options.el)
-    this.containerObj = document.querySelector('body')
-    this.containerObj.style.transformStyle = 'preserve-3d'
-    this.containerObj.style.perspective = `${this.options.perspective}px`
+    this.containerObj = document.querySelector(this.options.container)
     this.elObjs.forEach(item => {
       item.style.transitionProperty = 'transform'
       item.style.transitionDuration = `${this.options.transitionDuration}s`
-      item.style.transformStyle = 'preserve-3d'
     })
   }
 
@@ -108,10 +105,10 @@ export default class MouseShake {
   }
 
   effect (obj, offsetPercent, deltaPosition) {
-    let rotateXDeg = (offsetPercent.yPercent * this.options.effectConfig.maxAngle).toFixed(0) * -1 * this.options.direction
-    let rotateYDeg = (offsetPercent.xPercent * this.options.effectConfig.maxAngle).toFixed(0) * this.options.direction
-    let translateXPx = offsetPercent.xPercent * this.options.effectConfig.moveSpeed * this.options.direction
-    let translateYPx = offsetPercent.yPercent * this.options.effectConfig.moveSpeed * this.options.direction
+    let rotateXDeg = (offsetPercent.yPercent * this.options.effectConfig.maxAngle * -1 * this.options.direction).toFixed(4)
+    let rotateYDeg = (offsetPercent.xPercent * this.options.effectConfig.maxAngle * this.options.direction).toFixed(4)
+    let translateXPx = (offsetPercent.xPercent * this.options.effectConfig.moveSpeed * this.options.direction).toFixed(4)
+    let translateYPx = (offsetPercent.yPercent * this.options.effectConfig.moveSpeed * this.options.direction).toFixed(4)
     if (this.options.effect === 1) {
       obj.style.transform = `rotateX(${rotateXDeg}deg) rotateY(${rotateYDeg}deg)`
     } else if (this.options.effect === 2) {

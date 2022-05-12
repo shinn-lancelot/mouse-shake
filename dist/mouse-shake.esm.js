@@ -5,15 +5,15 @@
  */
 var defaultOptions = {
   el: '',
+  container: 'body',
   effect: 1,
   direction: 1,
   effectConfig: {
     maxAngle: 30,
     moveSpeed: 40
   },
-  perspective: 800,
   transitionDuration: 0.1,
-  keep: true
+  keep: false
 };
 
 var defaultExport = function defaultExport () {};
@@ -58,13 +58,10 @@ MouseShake.prototype.init = function init (options) {
 
   this.options = defaultExport.extend(JSON.parse(JSON.stringify(defaultOptions)), options);
   this.elObjs = document.querySelectorAll(this.options.el);
-  this.containerObj = document.querySelector('body');
-  this.containerObj.style.transformStyle = 'preserve-3d';
-  this.containerObj.style.perspective = (this.options.perspective) + "px";
+  this.containerObj = document.querySelector(this.options.container);
   this.elObjs.forEach(function (item) {
     item.style.transitionProperty = 'transform';
     item.style.transitionDuration = (this$1.options.transitionDuration) + "s";
-    item.style.transformStyle = 'preserve-3d';
   });
 };
 
@@ -152,10 +149,10 @@ MouseShake.prototype.calOffsetPercent = function calOffsetPercent (postion, cent
 };
 
 MouseShake.prototype.effect = function effect (obj, offsetPercent, deltaPosition) {
-  var rotateXDeg = (offsetPercent.yPercent * this.options.effectConfig.maxAngle).toFixed(0) * -1 * this.options.direction;
-  var rotateYDeg = (offsetPercent.xPercent * this.options.effectConfig.maxAngle).toFixed(0) * this.options.direction;
-  var translateXPx = offsetPercent.xPercent * this.options.effectConfig.moveSpeed * this.options.direction;
-  var translateYPx = offsetPercent.yPercent * this.options.effectConfig.moveSpeed * this.options.direction;
+  var rotateXDeg = (offsetPercent.yPercent * this.options.effectConfig.maxAngle * -1 * this.options.direction).toFixed(4);
+  var rotateYDeg = (offsetPercent.xPercent * this.options.effectConfig.maxAngle * this.options.direction).toFixed(4);
+  var translateXPx = (offsetPercent.xPercent * this.options.effectConfig.moveSpeed * this.options.direction).toFixed(4);
+  var translateYPx = (offsetPercent.yPercent * this.options.effectConfig.moveSpeed * this.options.direction).toFixed(4);
   if (this.options.effect === 1) {
     obj.style.transform = "rotateX(" + rotateXDeg + "deg) rotateY(" + rotateYDeg + "deg)";
   } else if (this.options.effect === 2) {
