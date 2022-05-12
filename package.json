@@ -1,6 +1,6 @@
 {
   "name": "bounce",
-  "version": "0.0.0",
+  "version": "0.0.1-beta",
   "description": "一个基于鼠标移动的轻量动画库",
   "main": "dist/bounce.cjs.js",
   "module": "dist/bounce.esm.js",
