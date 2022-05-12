@@ -30,25 +30,6 @@ const outFileInfo = {
     'umd': outPath + libName.toLowerCase() + '.min.js'
   }
 }
-let plugins = [
-  resolve(),
-  commonjs(),
-  buble({
-    include: 'src/js/**'
-  }),
-  flow(),
-  json()
-]
-production && plugins.concat([
-  terser(),
-  serve({
-    open: true,
-    openPage: '/example/index.html',
-    contentBase: '',
-    host: 'localhost',
-    port: 1180
-  })
-])
 
 export default {
   input: 'src/index.js',
@@ -72,5 +53,21 @@ export default {
       name: libName
     }
   ],
-  plugins: plugins
+  plugins: [
+    resolve(),
+    commonjs(),
+    buble({
+      include: 'src/js/**'
+    }),
+    production && terser(),
+    flow(),
+    json(),
+    (production ? '' : serve({
+      open: true,
+      openPage: '/example/index.html',
+      contentBase: '',
+      host: 'localhost',
+      port: 1180
+    }))
+  ]
 }

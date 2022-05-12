@@ -1,7 +1,7 @@
 {
   "name": "bounce",
   "version": "0.0.0",
-  "description": "一个基于鼠标移动的动画库",
+  "description": "一个基于鼠标移动的轻量动画库",
   "main": "dist/bounce.cjs.js",
   "module": "dist/bounce.esm.js",
   "browser": "dist/bounce.js",
@@ -13,7 +13,9 @@
     "lint": "eslint --fix --ext .js src"
   },
   "keywords": [
-    "bounce"
+    "bounce",
+    "鼠标移动",
+    "轻量动画库"
   ],
   "repository": {
     "type": "git",
