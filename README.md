@@ -4,7 +4,7 @@
 
 ### 效果
 
-![效果图]('./example/effect.gif')
+![效果图](https://github.com/shinn-lancelot/bounce/blob/master/example/effect.gif?raw=true)
 
 ### 安装
 
