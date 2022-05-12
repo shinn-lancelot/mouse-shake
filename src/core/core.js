@@ -15,7 +15,7 @@ export default class Bounce {
   init (options) {
     this.options = common.extend(JSON.parse(JSON.stringify(defaultOptions)), options)
     this.elObjs = document.querySelectorAll(this.options.el)
-    this.containerObj = document.querySelector(this.options.container)
+    this.containerObj = document.querySelector('body')
     this.containerObj.style.transformStyle = 'preserve-3d'
     this.containerObj.style.perspective = `${this.options.perspective}px`
     this.elObjs.forEach(item => {
