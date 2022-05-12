@@ -1,10 +1,10 @@
 {
-  "name": "bounce",
+  "name": "mouse-shake",
   "version": "0.0.1-beta",
   "description": "一个基于鼠标移动的轻量动画库",
-  "main": "dist/bounce.cjs.js",
-  "module": "dist/bounce.esm.js",
-  "browser": "dist/bounce.js",
+  "main": "dist/mouse-shake.cjs.js",
+  "module": "dist/mouse-shake.esm.js",
+  "browser": "dist/mouse-shake.js",
   "scripts": {
     "dev": "npm run watch",
     "watch": "rollup -c build/rollup.config.js -w",
@@ -13,16 +13,16 @@
     "lint": "eslint --fix --ext .js src"
   },
   "keywords": [
-    "bounce",
+    "mouse-shake",
     "鼠标移动",
     "轻量动画库"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/shinn-lancelot/bounce.git"
+    "url": "https://github.com/shinn-lancelot/mouse-shake.git"
   },
   "bugs": {
-    "url": "https://github.com/shinn-lancelot/bounce/issues"
+    "url": "https://github.com/shinn-lancelot/mouse-shake/issues"
   },
   "readme": "README.md",
   "author": "shinn_lancelot",

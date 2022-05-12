@@ -1,15 +1,15 @@
-## bounce
+## mouse-shake
 
 > 一个基于鼠标移动的轻量动画库
 
 ### 效果
 
-![效果图](https://github.com/shinn-lancelot/bounce/blob/master/example/effect.gif?raw=true)
+![效果图](https://github.com/shinn-lancelot/mouse-shake/blob/master/example/effect.gif?raw=true)
 
 ### 安装
 
 ```bash
-  npm i bounce
+  npm i mouse-shake
 ```
 
 ### 快速开始
@@ -20,7 +20,7 @@
 ```
 
 ```js
-  new Bounce({
+  new MouseShake({
     el: '.icon'
   })
 ```

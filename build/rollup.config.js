@@ -9,7 +9,7 @@ import pkg from '../package.json'
 
 const production = !process.env.ROLLUP_WATCH
 const version = process.env.VERSION || pkg.version
-const libName = 'Bounce'
+const libName = 'MouseShake'
 const birthYear = 2022
 const banner =
     '/*\n' +
@@ -25,9 +25,9 @@ const outFileInfo = {
     'umd': pkg.browser
   },
   'prod': {
-    'cjs': outPath + libName.toLowerCase() + '.cjs.min.js',
-    'esm': outPath + libName.toLowerCase() + '.esm.min.js',
-    'umd': outPath + libName.toLowerCase() + '.min.js'
+    'cjs': outPath + pkg.name + '.cjs.min.js',
+    'esm': outPath + pkg.name + '.esm.min.js',
+    'umd': outPath + pkg.name + '.min.js'
   }
 }
 
@@ -57,7 +57,7 @@ export default {
     resolve(),
     commonjs(),
     buble({
-      include: 'src/js/**'
+      include: 'src/**'
     }),
     production && terser(),
     flow(),

@@ -1,8 +1,11 @@
 import defaultOptions from './options'
 import common from './common'
 
-export default class Bounce {
+export default class MouseShake {
   constructor (options = {}) {
+    if (!(this instanceof MouseShake)) {
+      return new MouseShake(options)
+    }
     this.init(options)
     if (!this.checkOptions()) {
       return
