@@ -43,7 +43,7 @@ export default {
     },
     {
       file: production ? outFileInfo.prod.esm : outFileInfo.dev.esm,
-      format: 'es',
+      format: 'esm',
       banner: banner,
       name: libName,
       exports: 'auto'
