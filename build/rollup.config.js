@@ -1,9 +1,9 @@
-import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
-import buble from 'rollup-plugin-buble'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import buble from '@rollup/plugin-buble'
 import { terser } from 'rollup-plugin-terser'
 import flow from 'rollup-plugin-flow-no-whitespace'
-import json from 'rollup-plugin-json'
+import json from '@rollup/plugin-json'
 import serve from 'rollup-plugin-serve'
 import pkg from '../package.json'
 
@@ -38,19 +38,22 @@ export default {
       file: production ? outFileInfo.prod.cjs : outFileInfo.dev.cjs,
       format: 'cjs',
       banner: banner,
-      name: libName
+      name: libName,
+      exports: 'auto'
     },
     {
       file: production ? outFileInfo.prod.esm : outFileInfo.dev.esm,
       format: 'es',
       banner: banner,
-      name: libName
+      name: libName,
+      exports: 'auto'
     },
     {
       file: production ? outFileInfo.prod.umd : outFileInfo.dev.umd,
       format: 'umd',
       banner: banner,
-      name: libName
+      name: libName,
+      exports: 'auto'
     }
   ],
   plugins: [

@@ -54,14 +54,14 @@ var MouseShake = function MouseShake (options) {
 };
 
 MouseShake.prototype.init = function init (options) {
-    var this$1 = this;
+    var this$1$1 = this;
 
   this.options = defaultExport.extend(JSON.parse(JSON.stringify(defaultOptions)), options);
   this.elObjs = document.querySelectorAll(this.options.el);
   this.containerObj = document.querySelector(this.options.container);
   this.elObjs.forEach(function (item) {
     item.style.transitionProperty = 'transform';
-    item.style.transitionDuration = (this$1.options.transitionDuration) + "s";
+    item.style.transitionDuration = (this$1$1.options.transitionDuration) + "s";
   });
 };
 
@@ -91,28 +91,28 @@ MouseShake.prototype.listenMouseLeave = function listenMouseLeave () {
 };
 
 MouseShake.prototype.handleMouseMove = function handleMouseMove (event) {
-    var this$1 = this;
+    var this$1$1 = this;
 
   window.requestAnimationFrame(function () {
-    var position = this$1.getPosition(event);
-    var deltaPosition = this$1.calcDeltaPostion(position, this$1.centerPosition);
-    var offsetPercent = this$1.calOffsetPercent(position, this$1.centerPosition);
-    this$1.elObjs.forEach(function (item) {
-      this$1.effect(item, offsetPercent, deltaPosition);
+    var position = this$1$1.getPosition(event);
+    var deltaPosition = this$1$1.calcDeltaPostion(position, this$1$1.centerPosition);
+    var offsetPercent = this$1$1.calOffsetPercent(position, this$1$1.centerPosition);
+    this$1$1.elObjs.forEach(function (item) {
+      this$1$1.effect(item, offsetPercent, deltaPosition);
     });
   });
 };
 
 MouseShake.prototype.handleMouseLeave = function handleMouseLeave () {
-    var this$1 = this;
+    var this$1$1 = this;
 
   this.options.keep || setTimeout(function () {
-    this$1.elObjs.forEach(function (item) {
-      if (this$1.options.effect === 1) {
+    this$1$1.elObjs.forEach(function (item) {
+      if (this$1$1.options.effect === 1) {
         item.style.transform = "rotateX(0) rotateY(0)";
-      } else if (this$1.options.effect === 2) {
+      } else if (this$1$1.options.effect === 2) {
         item.style.transform = "translateX(0) translateY(0)";
-      } else if (this$1.options.effect === 3) {
+      } else if (this$1$1.options.effect === 3) {
         item.style.transform = "rotateX(0) rotateY(0) translateX(0) translateY(0)";
       }
     });
@@ -162,4 +162,4 @@ MouseShake.prototype.effect = function effect (obj, offsetPercent, deltaPosition
   }
 };
 
-export default MouseShake;
+export { MouseShake as default };
