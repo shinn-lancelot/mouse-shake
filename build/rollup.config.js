@@ -13,7 +13,7 @@ const libName = 'MouseShake'
 const birthYear = 2022
 const banner =
     '/*\n' +
-    ` * ${libName} v${version}\n` +
+    ` * ${pkg.name} v${version}\n` +
     ` * (c) ${birthYear}-${new Date().getFullYear()} ${pkg.author}\n` +
     ` * Released under the ${pkg.license} License.\n` +
     ' */'
