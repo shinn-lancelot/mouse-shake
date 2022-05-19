@@ -1,5 +1,5 @@
 /*
- * mouse-shake v0.0.1-beta
+ * mouse-shake v0.1.0-beta
  * (c) 2022-2022 shinn_lancelot
  * Released under the MIT License.
  */
