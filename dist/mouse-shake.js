@@ -1,5 +1,5 @@
 /*
- * MouseShake v0.0.1-beta
+ * mouse-shake v0.0.1-beta
  * (c) 2022-2022 shinn_lancelot
  * Released under the MIT License.
  */
@@ -19,7 +19,8 @@
       moveSpeed: 40
     },
     transitionDuration: 0.1,
-    keep: false
+    keep: false,
+    debug: false
   };
 
   var defaultExport = function defaultExport () {};
@@ -44,6 +45,13 @@
     return obj
   };
 
+  var name = "mouse-shake";
+  var version = "0.0.1-beta";
+  var repository = {
+  	type: "git",
+  	url: "https://github.com/shinn-lancelot/mouse-shake.git"
+  };
+
   var MouseShake = function MouseShake (options) {
     if ( options === void 0 ) options = {};
 
@@ -63,12 +71,15 @@
       var this$1$1 = this;
 
     this.options = defaultExport.extend(JSON.parse(JSON.stringify(defaultOptions)), options);
+    this.enable = true;
     this.elObjs = document.querySelectorAll(this.options.el);
     this.containerObj = document.querySelector(this.options.container);
     this.elObjs.forEach(function (item) {
       item.style.transitionProperty = 'transform';
       item.style.transitionDuration = (this$1$1.options.transitionDuration) + "s";
     });
+    this.bindHandleMouseMove = this.handleMouseMove.bind(this);
+    this.bindHandleMouseLeave = this.handleMouseLeave.bind(this);
   };
 
   MouseShake.prototype.checkOptions = function checkOptions () {
@@ -89,20 +100,26 @@
   };
 
   MouseShake.prototype.listenMouseMove = function listenMouseMove () {
-    this.containerObj.addEventListener('mousemove', this.handleMouseMove.bind(this), false);
+    this.containerObj.addEventListener('mousemove', this.bindHandleMouseMove);
   };
 
   MouseShake.prototype.listenMouseLeave = function listenMouseLeave () {
-    this.containerObj.addEventListener('mouseleave', this.handleMouseLeave.bind(this), false);
+    this.containerObj.addEventListener('mouseleave', this.bindHandleMouseLeave);
   };
 
   MouseShake.prototype.handleMouseMove = function handleMouseMove (event) {
       var this$1$1 = this;
 
-    window.requestAnimationFrame(function () {
+    this.enable && window.requestAnimationFrame(function () {
       var position = this$1$1.getPosition(event);
       var deltaPosition = this$1$1.calcDeltaPostion(position, this$1$1.centerPosition);
       var offsetPercent = this$1$1.calOffsetPercent(position, this$1$1.centerPosition);
+      this$1$1.options.debug && console.log(
+        'center-position:' + JSON.stringify(this$1$1.centerPosition) + '\n' +
+        'position:' + JSON.stringify(position) + '\n' +
+        'delta-position:' + JSON.stringify(deltaPosition) + '\n' +
+        'offset-percent:' + JSON.stringify(offsetPercent) + '\n'
+      );
       this$1$1.elObjs.forEach(function (item) {
         this$1$1.effect(item, offsetPercent, deltaPosition);
       });
@@ -112,7 +129,7 @@
   MouseShake.prototype.handleMouseLeave = function handleMouseLeave () {
       var this$1$1 = this;
 
-    this.options.keep || setTimeout(function () {
+    this.enable && (this.options.keep || setTimeout(function () {
       this$1$1.elObjs.forEach(function (item) {
         if (this$1$1.options.effect === 1) {
           item.style.transform = "rotateX(0) rotateY(0)";
@@ -122,7 +139,7 @@
           item.style.transform = "rotateX(0) rotateY(0) translateX(0) translateY(0)";
         }
       });
-    }, this.options.transitionDuration * 1000);
+    }, this.options.transitionDuration * 1000));
   };
 
   MouseShake.prototype.getPosition = function getPosition (event) {
@@ -166,6 +183,22 @@
     } else if (this.options.effect === 3) {
       obj.style.transform = "rotateX(" + rotateXDeg + "deg) rotateY(" + rotateYDeg + "deg) translateX(" + translateXPx + "px) translateY(" + translateYPx + "px)";
     }
+  };
+
+  MouseShake.prototype.version = function version$1 () {
+    var styles = [
+      'color: bisque',
+      'font-weight: bold'
+    ].join(';');
+    console.info('%c' + String.fromCodePoint(0x1F446) + " " + name + " v" + version + " " + String.fromCodePoint(0x1F9ED) + " " + (repository.url.replace(/\.git/g, '')), styles);
+  };
+
+  MouseShake.prototype.enable = function enable () {
+    this.enable = true;
+  };
+
+  MouseShake.prototype.disable = function disable () {
+    this.enable = false;
   };
 
   return MouseShake;

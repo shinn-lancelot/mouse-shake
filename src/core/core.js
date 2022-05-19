@@ -1,5 +1,6 @@
 import defaultOptions from './options'
 import common from './common'
+import { name, version, repository } from '../../package'
 
 export default class MouseShake {
   constructor (options = {}) {
@@ -17,12 +18,15 @@ export default class MouseShake {
 
   init (options) {
     this.options = common.extend(JSON.parse(JSON.stringify(defaultOptions)), options)
+    this.enable = true
     this.elObjs = document.querySelectorAll(this.options.el)
     this.containerObj = document.querySelector(this.options.container)
     this.elObjs.forEach(item => {
       item.style.transitionProperty = 'transform'
       item.style.transitionDuration = `${this.options.transitionDuration}s`
     })
+    this.bindHandleMouseMove = this.handleMouseMove.bind(this)
+    this.bindHandleMouseLeave = this.handleMouseLeave.bind(this)
   }
 
   checkOptions () {
@@ -43,18 +47,24 @@ export default class MouseShake {
   }
 
   listenMouseMove () {
-    this.containerObj.addEventListener('mousemove', this.handleMouseMove.bind(this), false)
+    this.containerObj.addEventListener('mousemove', this.bindHandleMouseMove)
   }
 
   listenMouseLeave () {
-    this.containerObj.addEventListener('mouseleave', this.handleMouseLeave.bind(this), false)
+    this.containerObj.addEventListener('mouseleave', this.bindHandleMouseLeave)
   }
 
   handleMouseMove (event) {
-    window.requestAnimationFrame(() => {
+    this.enable && window.requestAnimationFrame(() => {
       let position = this.getPosition(event)
       let deltaPosition = this.calcDeltaPostion(position, this.centerPosition)
       let offsetPercent = this.calOffsetPercent(position, this.centerPosition)
+      this.options.debug && console.log(
+        'center-position:' + JSON.stringify(this.centerPosition) + '\n' +
+        'position:' + JSON.stringify(position) + '\n' +
+        'delta-position:' + JSON.stringify(deltaPosition) + '\n' +
+        'offset-percent:' + JSON.stringify(offsetPercent) + '\n'
+      )
       this.elObjs.forEach(item => {
         this.effect(item, offsetPercent, deltaPosition)
       })
@@ -62,7 +72,7 @@ export default class MouseShake {
   }
 
   handleMouseLeave () {
-    this.options.keep || setTimeout(() => {
+    this.enable && (this.options.keep || setTimeout(() => {
       this.elObjs.forEach(item => {
         if (this.options.effect === 1) {
           item.style.transform = `rotateX(0) rotateY(0)`
@@ -72,7 +82,7 @@ export default class MouseShake {
           item.style.transform = `rotateX(0) rotateY(0) translateX(0) translateY(0)`
         }
       })
-    }, this.options.transitionDuration * 1000)
+    }, this.options.transitionDuration * 1000))
   }
 
   getPosition (event) {
@@ -116,5 +126,21 @@ export default class MouseShake {
     } else if (this.options.effect === 3) {
       obj.style.transform = `rotateX(${rotateXDeg}deg) rotateY(${rotateYDeg}deg) translateX(${translateXPx}px) translateY(${translateYPx}px)`
     }
+  }
+
+  version () {
+    let styles = [
+      'color: bisque',
+      'font-weight: bold'
+    ].join(';')
+    console.info('%c' + String.fromCodePoint(0x1F446) + ` ${name} v${version} ` + String.fromCodePoint(0x1F9ED) + ` ${repository.url.replace(/\.git/g, '')}`, styles)
+  }
+
+  enable () {
+    this.enable = true
+  }
+
+  disable () {
+    this.enable = false
   }
 }

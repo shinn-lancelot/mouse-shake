@@ -8,5 +8,6 @@ export default {
     moveSpeed: 40
   },
   transitionDuration: 0.1,
-  keep: false
+  keep: false,
+  debug: false
 }
