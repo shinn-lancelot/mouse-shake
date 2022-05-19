@@ -1,6 +1,6 @@
 {
   "name": "mouse-shake",
-  "version": "0.0.1-beta",
+  "version": "0.1.0-beta",
   "description": "一个基于鼠标移动的轻量动画库",
   "main": "dist/mouse-shake.cjs.js",
   "module": "dist/mouse-shake.esm.js",

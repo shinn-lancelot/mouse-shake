@@ -42,7 +42,7 @@ defaultExport.extend = function extend (obj, newObj) {
 };
 
 var name = "mouse-shake";
-var version = "0.0.1-beta";
+var version = "0.1.0-beta";
 var repository = {
 	type: "git",
 	url: "https://github.com/shinn-lancelot/mouse-shake.git"
