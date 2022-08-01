@@ -20,22 +20,34 @@
 
 ### 安装
 
-```bash
-  npm i mouse-shake
-```
+* npm方式
+
+  ```bash
+    npm i mouse-shake
+  ```
+
+* script方式
+
+  ```html
+    <script src="https://unpkg.com/mouse-shake@0.1.0-beta/dist/mouse-shake.js"></script>
+  ```
 
 ### 快速开始
 
-```html
-  <div class="icon"></div>
-  <div class="icon"></div>
-```
+* dom部分
 
-```js
-  let MS = new MouseShake({
-    el: '.icon'
-  })
-```
+  ```html
+    <div class="icon"></div>
+    <div class="icon"></div>
+  ```
+
+* 实例化MouseShake，el选项为需要绑定的元素
+
+  ```js
+    let MS = new MouseShake({
+      el: '.icon'
+    })
+  ```
 
 ### 选项
 
