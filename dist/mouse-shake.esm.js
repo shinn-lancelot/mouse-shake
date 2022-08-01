@@ -39,6 +39,16 @@ defaultExport.extend = function extend (obj, newObj) {
   return obj
 };
 
+defaultExport.getStyle = function getStyle (el) {
+  var style = '';
+  if (window.getComputedStyle) {
+    style = window.getComputedStyle(el);
+  } else {
+    style = el.currentStyle;
+  }
+  return style
+};
+
 var name = "mouse-shake";
 var version = "0.1.0-beta";
 var repository = {

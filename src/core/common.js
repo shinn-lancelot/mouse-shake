@@ -19,4 +19,14 @@ export default class {
     }
     return obj
   }
+
+  static getStyle (el) {
+    let style = ''
+    if (window.getComputedStyle) {
+      style = window.getComputedStyle(el)
+    } else {
+      style = el.currentStyle
+    }
+    return style
+  }
 }
