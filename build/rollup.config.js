@@ -69,7 +69,7 @@ export default {
       open: true,
       openPage: '/example/index.html',
       contentBase: '',
-      host: 'localhost',
+      host: '0.0.0.0',
       port: 1180
     }))
   ]
