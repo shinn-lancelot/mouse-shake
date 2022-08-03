@@ -149,10 +149,11 @@ MouseShake.prototype.handleMouseLeave = function handleMouseLeave () {
 };
 
 MouseShake.prototype.getPosition = function getPosition (event) {
+  this.containerObjRect = this.containerObj.getBoundingClientRect();
   var e = event || window.event;
   return {
-    x: e.clientX,
-    y: e.clientY
+    x: e.clientX - this.containerObjRect.left,
+    y: e.clientY - this.containerObjRect.top
   }
 };
 

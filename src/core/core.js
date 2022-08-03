@@ -86,10 +86,11 @@ export default class MouseShake {
   }
 
   getPosition (event) {
+    this.containerObjRect = this.containerObj.getBoundingClientRect()
     let e = event || window.event
     return {
-      x: e.clientX,
-      y: e.clientY
+      x: e.clientX - this.containerObjRect.left,
+      y: e.clientY - this.containerObjRect.top
     }
   }
 
