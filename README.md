@@ -20,7 +20,7 @@
 
 ### 安装
 
-* npm方式
+* npm方式（推荐）
 
   ```bash
     npm i mouse-shake
