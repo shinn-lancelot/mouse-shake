@@ -75,11 +75,11 @@ export default class MouseShake {
     this.enable && (this.options.keep || setTimeout(() => {
       this.elObjs.forEach(item => {
         if (this.options.effect === 1) {
-          item.style.transform = `rotateX(0) rotateY(0)`
-        } else if (this.options.effect === 2) {
           item.style.transform = `translateX(0) translateY(0)`
+        } else if (this.options.effect === 2) {
+          item.style.transform = `rotateX(0) rotateY(0)`
         } else if (this.options.effect === 3) {
-          item.style.transform = `rotateX(0) rotateY(0) translateX(0) translateY(0)`
+          item.style.transform = `translateX(0) translateY(0) rotateX(0) rotateY(0)`
         }
       })
     }, this.options.transitionDuration * 1000))
@@ -121,11 +121,11 @@ export default class MouseShake {
     let translateXPx = (offsetPercent.xPercent * this.options.effectConfig.moveSpeed * this.options.direction).toFixed(4)
     let translateYPx = (offsetPercent.yPercent * this.options.effectConfig.moveSpeed * this.options.direction).toFixed(4)
     if (this.options.effect === 1) {
-      obj.style.transform = `rotateX(${rotateXDeg}deg) rotateY(${rotateYDeg}deg)`
-    } else if (this.options.effect === 2) {
       obj.style.transform = `translateX(${translateXPx}px) translateY(${translateYPx}px)`
+    } else if (this.options.effect === 2) {
+      obj.style.transform = `rotateX(${rotateXDeg}deg) rotateY(${rotateYDeg}deg)`
     } else if (this.options.effect === 3) {
-      obj.style.transform = `rotateX(${rotateXDeg}deg) rotateY(${rotateYDeg}deg) translateX(${translateXPx}px) translateY(${translateYPx}px)`
+      obj.style.transform = `translateX(${translateXPx}px) translateY(${translateYPx}px) rotateX(${rotateXDeg}deg) rotateY(${rotateYDeg}deg)`
     }
   }
 
