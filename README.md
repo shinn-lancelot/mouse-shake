@@ -5,12 +5,17 @@
 <a href="https://www.npmjs.com/package/mouse-shake"><img src="https://img.shields.io/npm/dt/mouse-shake.svg" alt="Downloads"></a>
 <a href="https://github.com/shinn-lancelot/mouse-shake/releases"><img src="https://img.shields.io/github/release/shinn-lancelot/mouse-shake.svg" alt="Github Release"></a>
 <a href="https://www.npmjs.com/package/mouse-shake"><img src="https://img.shields.io/npm/v/mouse-shake.svg" alt="NPM Release"></a>
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c4e70470-10d6-4322-9413-71ed45d1a10c/deploy-status)](https://app.netlify.com/sites/mouse-shake/deploys)
 
 > 一个基于鼠标移动的轻量动画库
 
 ### 效果
 
 ![效果图](https://github.com/shinn-lancelot/mouse-shake/blob/master/example/effect.gif?raw=true)
+
+### 在线体验
+
+[点击体验](https://mouse-shake.netlify.app)
 
 ### 特性
 
