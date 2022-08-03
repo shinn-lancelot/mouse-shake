@@ -29,7 +29,7 @@
 * script方式
 
   ```html
-    <script src="https://unpkg.com/mouse-shake@0.1.0-beta/dist/mouse-shake.js"></script>
+    <script src="https://unpkg.com/mouse-shake"></script>
   ```
 
 ### 快速开始
