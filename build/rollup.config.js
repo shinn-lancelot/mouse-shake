@@ -5,6 +5,7 @@ import { terser } from 'rollup-plugin-terser'
 import flow from 'rollup-plugin-flow-no-whitespace'
 import json from '@rollup/plugin-json'
 import serve from 'rollup-plugin-serve'
+import copy from 'rollup-plugin-copy'
 import pkg from '../package.json'
 
 const production = !process.env.ROLLUP_WATCH
@@ -71,6 +72,13 @@ export default {
       contentBase: '',
       host: '0.0.0.0',
       port: 1180
-    }))
+    })),
+    copy({
+      targets: [
+        { src: `dist/*`, dest: `example/js` }
+      ],
+      hook: 'writeBundle',
+      verbose: true
+    })
   ]
 }
