@@ -1,5 +1,5 @@
 /*
- * mouse-shake v0.1.0-beta
+ * mouse-shake v0.2.0-beta
  * (c) 2022-2022 shinn_lancelot
  * Released under the MIT License.
  */
@@ -56,7 +56,7 @@
   };
 
   var name = "mouse-shake";
-  var version = "0.1.0-beta";
+  var version = "0.2.0-beta";
   var repository = {
   	type: "git",
   	url: "https://github.com/shinn-lancelot/mouse-shake.git"
